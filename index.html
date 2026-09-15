@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>灯塔 · 注意力复盘</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true">灯</span>
+          <div>
+            <strong>灯塔</strong>
+            <em>在偏航的混乱中重新聚焦主线</em>
+          </div>
+        </div>
+        <div class="top-actions">
+          <button id="loadSample" type="button">导入样例</button>
+          <button id="runAnalyze" class="primary" type="button">生成复盘</button>
+        </div>
+      </header>
+
+      <section class="grid hero-grid">
+        <form class="panel goal-panel" id="goalForm">
+          <div class="section-title">
+            <span>01</span>
+            <div>
+              <h1>本周北极星</h1>
+              <p>第一版固定按周复盘，目标投入占比按周独立设定。</p>
+            </div>
+          </div>
+
+          <label>
+            <span>重点任务 1</span>
+            <input id="goal1" name="goal1" required />
+          </label>
+          <label>
+            <span>重点任务 2</span>
+            <input id="goal2" name="goal2" />
+          </label>
+          <label>
+            <span>重点任务 3</span>
+            <input id="goal3" name="goal3" />
+          </label>
+          <div class="goal-row">
+            <label>
+              <span>目标投入占比</span>
+              <input id="targetFocus" name="targetFocus" type="number" min="30" max="90" step="5" />
+            </label>
+            <div class="period-card">
+              <span>周期</span>
+              <strong id="periodLabel">本周</strong>
+            </div>
+          </div>
+          <button class="primary wide" type="submit">保存本周目标</button>
+        </form>
+
+        <section class="panel connector-panel" aria-labelledby="connectorTitle">
+          <div class="section-title">
+            <span>02</span>
+            <div>
+              <h2 id="connectorTitle">数据保存</h2>
+              <p>公开网站默认采用浏览器本地存储，不上传个人工作记录。</p>
+            </div>
+          </div>
+          <div class="connector-list">
+            <article>
+              <strong id="dataModeTitle">正在检测运行模式...</strong>
+              <code id="dataModeDetail">请稍候</code>
+            </article>
+          </div>
+          <p class="hint" id="dataModeHint">网站会自动选择合适的数据保存方式。</p>
+        </section>
+      </section>
+
+      <section class="panel review-panel">
+        <div class="section-title">
+          <span>03</span>
+          <div>
+            <h2>本周精力分布</h2>
+            <p>基于工作痕迹估算，不是精确计时。北极星任务始终置顶。</p>
+          </div>
+        </div>
+        <div id="allocationList" class="allocation-list empty-state">还没有复盘结果，先导入记录并生成复盘。</div>
+      </section>
+
+      <section class="grid">
+        <section class="panel diagnosis-panel" aria-labelledby="diagnosisTitle">
+          <div class="section-title">
+            <span>04</span>
+            <div>
+              <h2 id="diagnosisTitle">注意力分配诊断</h2>
+              <p>按投向、专注、归属、成长四层拆解偏航原因。</p>
+            </div>
+          </div>
+          <div id="diagnosisList" class="card-list empty-state">暂无诊断。</div>
+        </section>
+
+        <section class="panel recommendations-panel" aria-labelledby="recommendationsTitle">
+          <div class="section-title">
+            <span>05</span>
+            <div>
+              <h2 id="recommendationsTitle">可执行建议</h2>
+              <p>建议必须来自诊断，落到下一周能执行的动作。</p>
+            </div>
+          </div>
+          <div id="recommendationList" class="card-list empty-state">暂无建议。</div>
+        </section>
+      </section>
+
+      <section class="grid">
+        <section class="panel growth-panel" aria-labelledby="growthTitle">
+          <div class="section-title">
+            <span>06</span>
+            <div>
+              <h2 id="growthTitle">成长记录</h2>
+              <p>第一版不做成长目标，只记录改善证据和仍需观察的问题。</p>
+            </div>
+          </div>
+          <div id="growthList" class="card-list empty-state">暂无成长记录。</div>
+        </section>
+
+        <section class="panel history-panel" aria-labelledby="historyTitle">
+          <div class="section-title">
+            <span>07</span>
+            <div>
+              <h2 id="historyTitle">历史复盘</h2>
+              <p>历史复盘自动保存在当前运行环境中。</p>
+            </div>
+          </div>
+          <div id="historyList" class="history-list empty-state">暂无历史。</div>
+        </section>
+      </section>
+    </main>
+
+    <template id="allocationTemplate">
+      <article class="allocation-row">
+        <div class="allocation-main">
+          <span class="tag"></span>
+          <div>
+            <strong></strong>
+            <p></p>
+          </div>
+        </div>
+        <div class="bar-wrap">
+          <i><b></b></i>
+          <em></em>
+        </div>
+      </article>
+    </template>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
