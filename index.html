@@ -7,150 +7,439 @@
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <main class="shell">
-      <header class="topbar">
-        <div class="brand">
-          <span class="brand-mark" aria-hidden="true">灯</span>
-          <div>
+    <section class="onboarding-screen" id="onboardingScreen" aria-labelledby="onboardingTitle">
+      <div class="onboarding-intro">
+        <a class="onboarding-brand" href="./index.html" aria-label="灯塔首页">
+          <span class="brand-mark" aria-hidden="true">⛯</span>
+          <span class="onboarding-brand-copy">
             <strong>灯塔</strong>
-            <em>在偏航的混乱中重新聚焦主线</em>
-          </div>
+            <em>注意力复盘</em>
+          </span>
+        </a>
+        <div class="onboarding-message">
+          <p class="kicker">欢迎来到灯塔</p>
+          <h1 id="onboardingTitle">在偏航的混乱中，帮你重新聚焦主线。</h1>
+          <p>写下本周期最需要高优推进的事项。灯塔会帮助你持续监控，并提醒它们是否被真正推进。</p>
         </div>
-        <div class="top-actions">
-          <button id="loadSample" type="button">导入样例</button>
-          <button id="runAnalyze" class="primary" type="button">生成复盘</button>
-        </div>
-      </header>
+        <p class="onboarding-note">不用精确计时。系统会根据工作痕迹估算注意力分布。</p>
+      </div>
 
-      <section class="grid hero-grid">
-        <form class="panel goal-panel" id="goalForm">
-          <div class="section-title">
+      <div class="onboarding-setup">
+        <button class="onboarding-skip" id="skipOnboarding" type="button">查看示例结果 →</button>
+        <form class="setup-form" id="lighthouseSetupForm">
+          <div class="setup-heading">
             <span>01</span>
             <div>
-              <h1>本周北极星</h1>
-              <p>第一版固定按周复盘，目标投入占比按周独立设定。</p>
+              <h2>写下 1-3 件重点任务</h2>
+              <p>这些事项会在复盘结果中始终置顶。</p>
             </div>
           </div>
 
-          <label>
-            <span>重点任务 1</span>
-            <input id="goal1" name="goal1" required />
-          </label>
-          <label>
-            <span>重点任务 2</span>
-            <input id="goal2" name="goal2" />
-          </label>
-          <label>
-            <span>重点任务 3</span>
-            <input id="goal3" name="goal3" />
-          </label>
-          <div class="goal-row">
+          <div class="setup-task-list">
             <label>
-              <span>目标投入占比</span>
-              <input id="targetFocus" name="targetFocus" type="number" min="30" max="90" step="5" />
+              <span>重点任务 1</span>
+              <input id="goalInput" type="text" value="履约陪伴 Agent 从方案设计到灰度上线的闭环推进" required />
             </label>
-            <div class="period-card">
-              <span>周期</span>
-              <strong id="periodLabel">本周</strong>
-            </div>
+            <label>
+              <span>重点任务 2 · 可选</span>
+              <input id="goalInput2" type="text" value="Agent SOP 标准化沉淀工具" />
+            </label>
+            <label>
+              <span>重点任务 3 · 可选</span>
+              <input id="goalInput3" type="text" value="协商方案能力与延期场景验证" />
+            </label>
           </div>
-          <button class="primary wide" type="submit">保存本周目标</button>
+
+          <div class="setup-row">
+            <div class="setup-week">
+              <span>记录周期</span>
+              <strong>本周 · 9.1-9.7</strong>
+              <small>灯塔固定按周记录与复盘</small>
+            </div>
+            <label class="setup-target-field">
+              <span>目标投入占比</span>
+              <span class="setup-percent-input">
+                <input id="targetFocus" type="number" min="30" max="90" step="5" value="60" aria-describedby="setupTargetHelp" />
+                <b aria-hidden="true">%</b>
+              </span>
+              <small id="setupTargetHelp">1-3 件重点任务的合计目标</small>
+            </label>
+          </div>
+
+          <button class="setup-submit" type="submit">开始记录</button>
         </form>
+      </div>
+    </section>
 
-        <section class="panel connector-panel" aria-labelledby="connectorTitle">
-          <div class="section-title">
-            <span>02</span>
+    <main class="app-shell" id="dashboardView" aria-label="灯塔注意力复盘产品网页" hidden>
+      <section class="workspace" aria-label="灯塔工作台">
+        <header class="topbar">
+          <div class="topbar-left">
+            <a class="brand-block" href="./index.html" aria-label="灯塔首页">
+              <span class="brand-mark" aria-hidden="true">⛯</span>
+              <span>
+                <strong>灯塔</strong>
+                <em>注意力复盘</em>
+              </span>
+            </a>
+            <button
+              class="history-trigger"
+              id="openHistory"
+              type="button"
+              aria-controls="historyDrawer"
+              aria-expanded="false"
+            >
+              <span aria-hidden="true">◷</span>
+              历史复盘
+            </button>
+          </div>
+          <nav class="top-links" aria-label="页面切换">
+            <a href="./presentation.html">陈述页</a>
+            <a href="./robot.html">机器人 mock</a>
+          </nav>
+        </header>
+
+        <button class="history-backdrop" id="historyBackdrop" type="button" aria-label="关闭历史复盘" hidden></button>
+        <aside class="history-drawer" id="historyDrawer" aria-labelledby="historyTitle" aria-hidden="true">
+          <header class="history-drawer-header">
             <div>
-              <h2 id="connectorTitle">数据保存</h2>
-              <p>公开网站默认采用浏览器本地存储，不上传个人工作记录。</p>
+              <p class="section-label">历史复盘</p>
+              <h2 id="historyTitle">每一周，主线占了多少？</h2>
             </div>
-          </div>
-          <div class="connector-list">
-            <article>
-              <strong id="dataModeTitle">正在检测运行模式...</strong>
-              <code id="dataModeDetail">请稍候</code>
-            </article>
-          </div>
-          <p class="hint" id="dataModeHint">网站会自动选择合适的数据保存方式。</p>
-        </section>
-      </section>
+            <button class="drawer-icon-button" id="closeHistory" type="button" aria-label="关闭历史复盘">×</button>
+          </header>
 
-      <section class="panel review-panel">
-        <div class="section-title">
-          <span>03</span>
-          <div>
-            <h2>本周精力分布</h2>
-            <p>基于工作痕迹估算，不是精确计时。北极星任务始终置顶。</p>
-          </div>
+          <section class="history-directory" id="historyDirectory" aria-label="历史周期目录">
+            <div class="history-directory-meta">
+              <span>按周查看</span>
+              <small>目标投入每周独立设定</small>
+            </div>
+            <div class="history-week-list">
+              <button class="history-week active incomplete" type="button" data-history-week="current">
+                <span class="history-week-heading"><strong>本周 · 9.1-9.7</strong><em id="historyCurrentMeta">3 个重点任务 · 目标 60%</em></span>
+                <span class="history-progress"><i><b style="width: 40%"></b></i><strong>40%</strong></span>
+                <small id="historyCurrentGap">距目标 20%</small>
+              </button>
+              <button class="history-week incomplete" type="button" data-history-week="w9">
+                <span class="history-week-heading"><strong>8.25-8.31</strong><em>3 个重点任务 · 目标 55%</em></span>
+                <span class="history-progress"><i><b style="width: 48%"></b></i><strong>48%</strong></span>
+                <small>距目标 7%</small>
+              </button>
+              <button class="history-week incomplete" type="button" data-history-week="w8">
+                <span class="history-week-heading"><strong>8.18-8.24</strong><em>2 个重点任务 · 目标 50%</em></span>
+                <span class="history-progress"><i><b style="width: 41%"></b></i><strong>41%</strong></span>
+                <small>距目标 9%</small>
+              </button>
+              <button class="history-week incomplete" type="button" data-history-week="w7">
+                <span class="history-week-heading"><strong>8.11-8.17</strong><em>3 个重点任务 · 目标 60%</em></span>
+                <span class="history-progress"><i><b style="width: 34%"></b></i><strong>34%</strong></span>
+                <small>距目标 26%</small>
+              </button>
+              <button class="history-week completed" type="button" data-history-week="w6">
+                <span class="history-week-heading"><strong>8.4-8.10</strong><em>2 个重点任务 · 目标 60%</em></span>
+                <span class="history-progress"><i><b style="width: 64%"></b></i><strong>64%</strong></span>
+                <small>超过目标 4%</small>
+              </button>
+            </div>
+          </section>
+
+          <section class="history-detail" id="historyDetail" aria-label="周期复盘详情" hidden>
+            <button class="history-back-button" id="historyBack" type="button">← 返回周期目录</button>
+            <div class="history-detail-heading">
+              <div>
+                <p class="section-label" id="historyDetailPeriod">本周 · 9.1-9.7</p>
+                <h3 id="historyDetailConclusion">重点任务投入 40%，距目标还差 20%。</h3>
+              </div>
+              <div class="history-detail-score">
+                <strong id="historyDetailPercent">40%</strong>
+                <small id="historyDetailTarget">目标 60%</small>
+              </div>
+            </div>
+
+            <section class="history-detail-section" aria-labelledby="historyTasksTitle">
+              <h4 id="historyTasksTitle">当周重点任务</h4>
+              <ol id="historyTaskList"></ol>
+            </section>
+
+            <section class="history-detail-section" aria-labelledby="historyDailyTitle">
+              <h4 id="historyDailyTitle">每天的投入与任务量</h4>
+              <div class="history-daily-table" id="historyDailyTable"></div>
+            </section>
+
+            <section class="history-detail-section history-summary" aria-labelledby="historySummaryTitle">
+              <h4 id="historySummaryTitle">周总结</h4>
+              <p id="historySummary"></p>
+            </section>
+
+            <section class="history-detail-section history-review" aria-labelledby="historyReviewTitle">
+              <h4 id="historyReviewTitle">复盘记录</h4>
+              <p id="historyReview"></p>
+            </section>
+          </section>
+        </aside>
+
+        <div class="tab-bar" role="tablist" aria-label="灯塔内容">
+          <button class="tab-button active" type="button" role="tab" aria-selected="true" aria-controls="todayPanel" data-tab="today">
+            今日事情
+          </button>
+          <button class="tab-button" type="button" role="tab" aria-selected="false" aria-controls="growthPanel" data-tab="growth">
+            成长
+          </button>
         </div>
-        <div id="allocationList" class="allocation-list empty-state">还没有复盘结果，先导入记录并生成复盘。</div>
-      </section>
 
-      <section class="grid">
-        <section class="panel diagnosis-panel" aria-labelledby="diagnosisTitle">
-          <div class="section-title">
-            <span>04</span>
-            <div>
-              <h2 id="diagnosisTitle">注意力分配诊断</h2>
-              <p>按投向、专注、归属、成长四层拆解偏航原因。</p>
-            </div>
-          </div>
-          <div id="diagnosisList" class="card-list empty-state">暂无诊断。</div>
-        </section>
+        <section class="control-tabs" aria-label="灯塔平台">
+          <section class="tab-panel active" id="todayPanel" role="tabpanel" aria-label="今日事情">
+            <section class="current-plan" id="goalSetup" aria-label="本周置顶任务">
+              <div class="current-plan-heading">
+                <h2 id="currentPeriodLabel">9月1日 - 9月7日的高优任务</h2>
+                <p class="current-plan-target">目标投入 <strong id="currentTargetLabel">60%</strong></p>
+              </div>
+              <div class="current-plan-tasks">
+                <p><span>3 个置顶任务</span></p>
+                <ol class="current-plan-list">
+                  <li id="goalTitle">履约陪伴 Agent 从方案设计到灰度上线的闭环推进</li>
+                  <li id="goalTitle2">Agent SOP 标准化沉淀工具</li>
+                  <li id="goalTitle3">协商方案能力与延期场景验证</li>
+                </ol>
+              </div>
+              <div class="current-plan-actions">
+                <button id="editSetup" type="button">任务更改</button>
+              </div>
+            </section>
 
-        <section class="panel recommendations-panel" aria-labelledby="recommendationsTitle">
-          <div class="section-title">
-            <span>05</span>
-            <div>
-              <h2 id="recommendationsTitle">可执行建议</h2>
-              <p>建议必须来自诊断，落到下一周能执行的动作。</p>
-            </div>
-          </div>
-          <div id="recommendationList" class="card-list empty-state">暂无建议。</div>
-        </section>
-      </section>
+            <section class="allocation-stage" aria-label="时间精力分布">
+              <div class="allocation-header">
+                <div class="numbered-section-title">
+                  <span>01</span>
+                  <h2>本阶段精力分布</h2>
+                </div>
+                <p class="formula-note">
+                  公式：f(日程/会议时长、文档编辑活跃度、企微主动消息、AI 对话轮次与 token、待办完成)；这是估算，不做精确计时。
+                </p>
+              </div>
 
-      <section class="grid">
-        <section class="panel growth-panel" aria-labelledby="growthTitle">
-          <div class="section-title">
-            <span>06</span>
-            <div>
-              <h2 id="growthTitle">成长记录</h2>
-              <p>第一版不做成长目标，只记录改善证据和仍需观察的问题。</p>
-            </div>
-          </div>
-          <div id="growthList" class="card-list empty-state">暂无成长记录。</div>
-        </section>
+              <div class="allocation-layout" id="reviewResults">
+                <div class="allocation-list" role="list" aria-label="按比重排序的任务类型">
+                  <article class="allocation-row active is-pinned" role="listitem">
+                    <span class="rank is-pinned">置顶</span>
+                    <div class="allocation-copy">
+                      <strong>重点任务：履约陪伴 Agent 主线</strong>
+                      <em>方案设计、工作流编排、工程对齐、灰度上线与问题排查</em>
+                      <i class="bar"><b style="width: 40%"></b></i>
+                    </div>
+                    <span class="percent">40%</span>
+                  </article>
 
-        <section class="panel history-panel" aria-labelledby="historyTitle">
-          <div class="section-title">
-            <span>07</span>
-            <div>
-              <h2 id="historyTitle">历史复盘</h2>
-              <p>历史复盘自动保存在当前运行环境中。</p>
-            </div>
-          </div>
-          <div id="historyList" class="history-list empty-state">暂无历史。</div>
+                  <article class="allocation-row" role="listitem">
+                    <span class="rank">02</span>
+                    <div class="allocation-copy">
+                      <strong>协商方案能力与延期场景</strong>
+                      <em>延期能力提需、多方案通知卡片、资格校验规则、金额调整场景</em>
+                      <i class="bar"><b style="width: 18%"></b></i>
+                    </div>
+                    <span class="percent">18%</span>
+                  </article>
+
+                  <article class="allocation-row" role="listitem">
+                    <span class="rank">03</span>
+                    <div class="allocation-copy">
+                      <strong>Agent SOP 标准化与效率 skill</strong>
+                      <em>自然语言生成流程图、可编辑校验、版本溯源、Word 转 HTML</em>
+                      <i class="bar"><b style="width: 16%"></b></i>
+                    </div>
+                    <span class="percent">16%</span>
+                  </article>
+
+                  <article class="allocation-row" role="listitem">
+                    <span class="rank">04</span>
+                    <div class="allocation-copy">
+                      <strong>线上 case 回流与 L2/L3 评测</strong>
+                      <em>好坏 case 出口、bad case 修复、评测分层、红线规则沉淀</em>
+                      <i class="bar"><b style="width: 12%"></b></i>
+                    </div>
+                    <span class="percent">12%</span>
+                  </article>
+
+                  <article class="allocation-row" role="listitem">
+                    <span class="rank">05</span>
+                    <div class="allocation-copy">
+                      <strong>IVR 语音提醒与多渠道触达</strong>
+                      <em>到期提醒、外呼合作、字段队列映射、关怀口吻话术</em>
+                      <i class="bar"><b style="width: 8%"></b></i>
+                    </div>
+                    <span class="percent">8%</span>
+                  </article>
+
+                  <article class="allocation-row" role="listitem">
+                    <span class="rank">06</span>
+                    <div class="allocation-copy">
+                      <strong>汇报材料与跨团队对齐</strong>
+                      <em>项目汇报、设计提需、研发联调、客服与模型侧对齐</em>
+                      <i class="bar"><b style="width: 6%"></b></i>
+                    </div>
+                    <span class="percent">6%</span>
+                  </article>
+                </div>
+              </div>
+            </section>
+
+            <section class="action-plan" aria-label="注意力分配诊断">
+              <div class="section-heading">
+                <div class="numbered-section-title">
+                  <span>02</span>
+                  <h2>注意力分配诊断</h2>
+                </div>
+              </div>
+
+              <section class="diagnosis-section" aria-labelledby="diagnosisPrinciples">
+                <header>
+                  <span>01</span>
+                  <div><h3 id="diagnosisPrinciples">诊断原则</h3><p>四层注意力分析框架</p></div>
+                </header>
+                <div class="principle-cards" aria-label="四层注意力分析框架">
+                  <article>
+                    <span>第一层 · 投向</span>
+                    <h4>重点任务获得了多少投入？</h4>
+                    <p>判断实际投入是否与任务优先级相匹配，识别紧急但不重要事项的过度占用。</p>
+                    <em>理论参照：艾森豪威尔矩阵</em>
+                  </article>
+                  <article>
+                    <span>第二层 · 专注</span>
+                    <h4>高质量时间用在了哪里？</h4>
+                    <p>观察黄金时段是否形成连续推进，判断消息与切换造成的注意力残留。</p>
+                    <em>理论参照：深度工作</em>
+                  </article>
+                  <article>
+                    <span>第三层 · 归属</span>
+                    <h4>这些投入必须由我承担吗？</h4>
+                    <p>区分本人判断、可转交执行与可工具化环节，校准个人责任边界。</p>
+                    <em>理论参照：比较优势与授权原则</em>
+                  </article>
+                  <article>
+                    <span>第四层 · 成长</span>
+                    <h4>同类问题正在减少吗？</h4>
+                    <p>追踪重复劳动和返工是否下降，确认一次校准是否沉淀为稳定方法。</p>
+                    <em>理论参照：刻意练习与学习曲线</em>
+                  </article>
+                </div>
+              </section>
+
+              <section class="diagnosis-section" aria-labelledby="diagnosisProblems">
+                <header>
+                  <span>02</span>
+                  <div><h3 id="diagnosisProblems">存在问题</h3><p>本周识别到四项注意力偏差</p></div>
+                </header>
+                <div class="problem-analysis">
+                  <article><span>投向</span><div><strong>主线投入低于目标</strong><p>履约陪伴 Agent 主线实际投入 40%，比本周目标低 20%；协商方案与 SOP 共占 34%，成为主要分流。</p></div></article>
+                  <article><span>专注</span><div><strong>连续推进窗口被支线穿插</strong><p>case 回流、触达与跨团队对齐共占 26%，且多依赖异步消息，主线推进容易在工作日内被多次切开。</p></div></article>
+                  <article><span>归属</span><div><strong>低判断成本工作仍由本人承接</strong><p>case 初筛、字段核对和材料同步仍占据个人注意力，成功标准与异常兜底尚未和执行工作分离。</p></div></article>
+                  <article><span>成长</span><div><strong>重复支线尚未完全沉淀</strong><p>SOP、协商边界和评测规则已有积累，但还没有形成统一入口，类似问题仍会重复触发沟通与确认。</p></div></article>
+                </div>
+              </section>
+
+              <section class="diagnosis-section" aria-labelledby="diagnosisSolutions">
+                <header>
+                  <span>03</span>
+                  <div><h3 id="diagnosisSolutions">我们的解法</h3><p>基于本周工作痕迹生成的具体调整方案</p></div>
+                </header>
+                <div class="detailed-solutions">
+                  <article>
+                    <header><span>建议一</span><h4>把上午 9:00-11:30 设为主线深度工作块</h4></header>
+                    <p class="solution-reason"><strong>为什么：</strong>本周观察到下午会议和协作对齐更密集，而上午几乎没有固定会议。上午这段没有强制打扰的时间，最适合留给灰度归因、策略判断、关键材料撰写这类需要长期专注的主线任务。</p>
+                    <div class="solution-steps"><strong>操作方案</strong><ul><li>上午关闭协商、case 回流和跨团队群的普通通知，只保留履约陪伴 Agent 主线群。</li><li>9:00 用 10 分钟浏览消息并做标记，不立即展开处理；需要回复的统一移入下午窗口。</li><li>灰度问题归因、策略判断和关键材料撰写固定在这一时段，临时会议不占用该窗口。</li></ul></div>
+                    <p class="solution-outcome">预期变化：先保证主线连续推进，再处理支线，逐步补回 20% 的投入差口。</p>
+                  </article>
+                  <article>
+                    <header><span>建议二</span><h4>为穿插任务建立 16:00-17:00 的固定缓冲区</h4></header>
+                    <p class="solution-reason"><strong>为什么：</strong>协商、IVR 触达、case 与跨团队对齐都必须处理，但多数不要求即时响应；随机出现会不断制造注意力切换。</p>
+                    <div class="solution-steps"><strong>操作方案</strong><ul><li>将延期卡片、外呼合作、字段队列、普通 case 和材料同步统一引导到该时段。</li><li>在协作群明确响应规则：普通事项进入缓冲区，阻塞交付的事项通过 @ 或电话升级。</li><li>同类任务一次批量处理并集中回复，避免全天反复进入同一上下文。</li></ul></div>
+                    <p class="solution-outcome">预期变化：必要支线仍被完成，但主线不再因每条消息重复中断。</p>
+                  </article>
+                  <article>
+                    <header><span>建议三</span><h4>把重复核对工作拆成“首次把关 + 后续转交”</h4></header>
+                    <p class="solution-reason"><strong>为什么：</strong>case 初筛、字段核对、材料整理的判断成本较低，却持续占用个人精力；这些任务已经具备被标准化承接的条件。</p>
+                    <div class="solution-steps"><strong>操作方案</strong><ul><li>本人只负责首次定义成功标准、异常类型和红线规则，形成一页检查清单。</li><li>后续常规核对交给协作者或机器人；只有异常项、边界项和关键策略回到本人。</li><li>将协商边界、SOP 生成模板与 L2/L3 评测规则放进统一入口，每次只补新增边界。</li></ul></div>
+                    <p class="solution-outcome">预期变化：从“每次亲自做”转为“建立机制并处理异常”，减少重复投入和返工。</p>
+                  </article>
+                </div>
+              </section>
+            </section>
+          </section>
+
+          <section class="tab-panel growth-panel" id="growthPanel" role="tabpanel" aria-label="成长" hidden>
+            <section class="growth-trend" aria-labelledby="growthTrendTitle">
+              <header class="growth-section-heading">
+                <div><span>01</span><h2 id="growthTrendTitle">重点任务投入占比曲线</h2></div>
+                <p>从开始使用灯塔至今，实际投入与每周设定标准的关系。</p>
+              </header>
+              <div class="growth-chart-wrap">
+                <div class="growth-chart-legend" aria-label="图例">
+                  <span class="actual">实际占比</span>
+                  <span class="standard">设定标准</span>
+                  <span class="below">低于标准</span>
+                  <span class="above">高于标准</span>
+                </div>
+                <svg class="growth-chart" viewBox="0 0 900 360" role="img" aria-labelledby="growthChartTitle growthChartDesc">
+                  <title id="growthChartTitle">重点任务实际投入与设定标准曲线</title>
+                  <desc id="growthChartDesc">8月4日至9月7日共五周。第一周实际投入高于标准，之后四周低于标准。</desc>
+                  <g class="chart-grid">
+                    <line x1="72" y1="42" x2="850" y2="42"></line>
+                    <line x1="72" y1="102" x2="850" y2="102"></line>
+                    <line x1="72" y1="162" x2="850" y2="162"></line>
+                    <line x1="72" y1="222" x2="850" y2="222"></line>
+                    <line x1="72" y1="282" x2="850" y2="282"></line>
+                  </g>
+                  <g class="chart-y-labels">
+                    <text x="28" y="47">80%</text><text x="28" y="107">60%</text><text x="28" y="167">40%</text><text x="28" y="227">20%</text><text x="40" y="287">0</text>
+                  </g>
+                  <polygon class="chart-area-above" points="78,90 104,102 78,102"></polygon>
+                  <polygon class="chart-area-below" points="104,102 272,180 466,159 660,138 844,162 844,102 660,117 466,132 272,102"></polygon>
+                  <path class="chart-standard-line" d="M78 102 L272 102 L466 132 L660 117 L844 102"></path>
+                  <path class="chart-actual-line" d="M78 90 L272 180 L466 159 L660 138 L844 162"></path>
+                  <g class="chart-standard-dots">
+                    <circle cx="78" cy="102" r="5"></circle><circle cx="272" cy="102" r="5"></circle><circle cx="466" cy="132" r="5"></circle><circle cx="660" cy="117" r="5"></circle><circle cx="844" cy="102" r="5"></circle>
+                  </g>
+                  <g class="chart-actual-dots">
+                    <circle cx="78" cy="90" r="6"></circle><circle cx="272" cy="180" r="6"></circle><circle cx="466" cy="159" r="6"></circle><circle cx="660" cy="138" r="6"></circle><circle cx="844" cy="162" r="6"></circle>
+                  </g>
+                  <g class="chart-values">
+                    <text x="78" y="76">64%</text><text x="272" y="200">34%</text><text x="466" y="179">41%</text><text x="660" y="158">48%</text><text x="844" y="182">40%</text>
+                  </g>
+                  <g class="chart-x-labels">
+                    <text x="78" y="326">8.4-8.10</text><text x="272" y="326">8.11-8.17</text><text x="466" y="326">8.18-8.24</text><text x="660" y="326">8.25-8.31</text><text x="844" y="326">9.1-9.7</text>
+                  </g>
+                </svg>
+              </div>
+            </section>
+
+            <section class="growth-review" aria-labelledby="growthReviewTitle">
+              <header class="growth-section-heading">
+                <div><span>02</span><h2 id="growthReviewTitle">我的评价</h2></div>
+                <p>判断依据：投向、专注、归属、成长。</p>
+              </header>
+              <div class="growth-review-grid">
+                <article class="growth-review-good">
+                  <header><span>做得好的</span><strong>之前发现的缺口，已经出现改善证据</strong></header>
+                  <ul>
+                    <li><b>归属</b><div><strong>重复核对开始转交</strong><p>case 初筛、字段核对已形成检查清单，常规执行逐步交给协作者，个人只处理异常项。</p></div></li>
+                    <li><b>成长</b><div><strong>方法开始沉淀复用</strong><p>协商边界与 Agent SOP 已整理成策略清单和模板，同类问题不再每次从零讨论。</p></div></li>
+                  </ul>
+                </article>
+                <article class="growth-review-bad">
+                  <header><span>做得不好的</span><strong>之前识别的缺口，仍然持续存在</strong></header>
+                  <ul>
+                    <li><b>投向</b><div><strong>重点任务投入仍低于标准</strong><p>本周实际投入 40%，低于设定标准 60%；协商、SOP 与跨团队事项仍在持续分流。</p></div></li>
+                    <li><b>专注</b><div><strong>主线启动变早，但还不稳定</strong><p>上午已经出现主线推进记录，但仍会被群消息切开，尚未形成稳定的连续工作块。</p></div></li>
+                  </ul>
+                  <p class="growth-next-step"><strong>下一轮校准：</strong>工作日上午 9:20 提醒，追踪是否在 10:30 前启动重点任务。</p>
+                </article>
+              </div>
+            </section>
+          </section>
         </section>
       </section>
     </main>
 
-    <template id="allocationTemplate">
-      <article class="allocation-row">
-        <div class="allocation-main">
-          <span class="tag"></span>
-          <div>
-            <strong></strong>
-            <p></p>
-          </div>
-        </div>
-        <div class="bar-wrap">
-          <i><b></b></i>
-          <em></em>
-        </div>
-      </article>
-    </template>
-
-    <script type="module" src="./app.js"></script>
+    <script src="./app.js"></script>
   </body>
 </html>

@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>灯塔 · 陈述页</title>
+    <link rel="stylesheet" href="./presentation.css" />
+  </head>
+  <body>
+    <main class="deck" aria-label="灯塔陈述页">
+      <nav class="deck-nav" aria-label="陈述页导航">
+        <button class="nav-button" id="prevSlide" type="button">上一页</button>
+        <div class="progress-track" aria-hidden="true">
+          <span id="progressBar"></span>
+        </div>
+        <span id="pageIndicator">01 / 09</span>
+        <button class="nav-button primary" id="nextSlide" type="button">下一页</button>
+      </nav>
+
+      <section class="slide active cover-slide" data-title="开场">
+        <div class="slide-card hero-card">
+          <p class="deck-label">注意力复盘工具</p>
+          <h1 class="cover-title">灯塔：帮助你在偏航的混乱中重新聚焦主线任务</h1>
+          <p class="cover-subtitle">它帮你盯着最重要的事情，不让你的一天又白忙一场。</p>
+        </div>
+        <footer class="page-footer">01 / 09</footer>
+      </section>
+
+      <section class="slide thesis-slide" data-title="注意力">
+        <div class="slide-card">
+          <p class="question-hook">职场新人真实的一天</p>
+          <div class="dilemma-layout">
+            <article class="priority-card">
+              <span>原本想做</span>
+              <h3>把履约陪伴的流程图画完</h3>
+              <p>早上打开电脑时，我很清楚：今天最该高优推进的，就是这件主线任务。</p>
+            </article>
+            <article class="interruption-card">
+              <span>从早上九点开始</span>
+              <p class="story-intro">事情一件件挤进视野里：</p>
+              <ul class="interruption-list">
+                <li>群里 @ 我核对数据</li>
+                <li>研发喊我确认边界情况</li>
+                <li>临时修改周五汇报 PPT</li>
+                <li>新同学来请教我问题</li>
+                <li>合作团队和电催团队找我要预估的进线数据</li>
+                <li>客服团队找我要新政策的说明文档</li>
+                <li>另一个需求的会议需要我参与</li>
+                <li class="more-item">……</li>
+              </ul>
+              <p class="story-outro">等我回过神，天已经黑了。忙了一整天，但流程图还没有真正推进。</p>
+            </article>
+          </div>
+        </div>
+        <footer class="page-footer">02 / 09</footer>
+      </section>
+
+      <section class="slide truth-slide" data-title="注意力真相">
+        <div class="slide-card">
+          <article class="truth-copy">
+            <p class="deck-label">这件事背后的真相</p>
+            <h2>你的注意力在哪里，结果就在哪里。</h2>
+            <p>忙碌本身不等于结果，一天的价值不看你做多少事，而是看你最重要、最高优的事情做了多少。</p>
+            <p class="mistake-line">职场新人最容易犯的错，就是把注意力给了那些看起来紧急、其实不重要的杂事。</p>
+          </article>
+        </div>
+        <footer class="page-footer">03 / 09</footer>
+      </section>
+
+      <section class="slide" data-title="混乱中的表现">
+        <div class="slide-card">
+          <div class="two-columns phenomenon-grid">
+            <article>
+              <span>01</span>
+              <h3>有主要目标，但忙着忙着就忘掉了</h3>
+              <p>一直在响应挤进视野里的其他内容，它们不断把注意力从主线任务上移走。</p>
+            </article>
+            <article>
+              <span>02</span>
+              <h3>晚上复盘时发现跑偏了，但不知道偏了多少、怎么偏的</h3>
+              <p>很难说清时间具体花在了哪件事情上；白天处理的事情看起来都很小，但加在一起却让我无法处理主线任务。</p>
+            </article>
+          </div>
+          <p class="bottom-line">所以真正缺的不是再努力一点，而是能看见分流、及时拉回、晚上复盘的外部系统。</p>
+        </div>
+        <footer class="page-footer">04 / 09</footer>
+      </section>
+
+      <section class="slide comparison-slide" data-title="成因分析">
+        <div class="slide-card">
+          <p class="question-hook">为什么职场新人容易出现这种问题？</p>
+          <h2>因为学生时代的输入很简单，工作场景的复杂度陡升，需要多线并行。</h2>
+          <div class="comparison-table">
+            <div class="table-head">维度</div>
+            <div class="table-head">学生时代</div>
+            <div class="table-head">职场</div>
+            <div>任务结构</div>
+            <div>范围清晰的题目</div>
+            <div>问题通常模糊，需要先找清晰的问题，再拆任务、排优先级、协调人、跟进变化。</div>
+            <div>节奏来源</div>
+            <div>跟着作业、考试走</div>
+            <div>跟着用户需求、项目节点、上级安排、团队依赖、突发情况走。</div>
+            <div>完成标准</div>
+            <div>标准答案</div>
+            <div>追求解决问题和复用性，要求下一步能推进，风险能处理，事情有闭环。</div>
+            <div>能力要求</div>
+            <div>会做题，考试分数达标</div>
+            <div>会判断重点，会沟通对齐，会推动进度，会协调资源，会承担结果。</div>
+          </div>
+          <p class="ai-note">AI 让这个问题更明显：产出速度变快，最短工期被压缩，消息、文档、版本和反馈都更容易把注意力切碎。</p>
+        </div>
+        <footer class="page-footer">05 / 09</footer>
+      </section>
+
+      <section class="slide break-slide" data-title="如何破局">
+        <div class="slide-card">
+          <p class="deck-label">解决方案 · 先说别人为什么失败</p>
+          <h2>那么如何破局？</h2>
+          <p class="question-hook">市面上几百个专注工具，为什么救不了新人？</p>
+          <div class="failure-list">
+            <article>
+              <h3>番茄钟 / 专注 App</h3>
+              <p>帮你计时 25 分钟，却不告诉你该专注的到底是不是“对的那件事”。</p>
+            </article>
+            <article>
+              <h3>Todo 清单 / 任务管理</h3>
+              <p>帮你把事记下来，可一堆任务里哪个最重要，还是得你自己判断。它没法帮上真正的忙。</p>
+            </article>
+            <article>
+              <h3>它们共同的问题</h3>
+              <p><strong>都要你主动录入、主动打卡、主动复盘。</strong>结果，“管理注意力”这件事，反而变成了又一个消耗注意力的新任务。</p>
+            </article>
+          </div>
+        </div>
+        <footer class="page-footer">06 / 09</footer>
+      </section>
+
+      <section class="slide companion-slide" data-title="产品定位">
+        <div class="slide-card">
+          <p class="deck-label">灯塔的核心产品定位</p>
+          <h2>它的陪伴，发生在事中和事后。</h2>
+          <div class="companion-grid">
+            <article>
+              <span>01</span>
+              <h3>事中轻度提醒</h3>
+              <p>平时几乎隐身。只有当你连续被支线牵走、快要忘掉主线时，它轻轻拍一下，帮你意识到注意力正在被移走。</p>
+            </article>
+            <article>
+              <span>02</span>
+              <h3>事后重头戏</h3>
+              <p>一天结束时陪你清醒地复盘，把工作痕迹整理成分流结果，再带着你做四层追问。</p>
+              <p class="question-chain">该不该做 → 要不要现在做 → 是不是该我做 → 怎么做更好</p>
+            </article>
+          </div>
+          <p class="bottom-line">它不增加任何负担，因为该判断的事，都放在你最清醒的时候。</p>
+        </div>
+        <footer class="page-footer">07 / 09</footer>
+      </section>
+
+      <section class="slide growth-model-slide" data-title="成长机制">
+        <div class="slide-card">
+          <p class="deck-label">它怎么帮助你成长</p>
+          <h2>成长不是多看一份建议，而是慢慢建立更好的判断逻辑。</h2>
+          <div class="growth-model">
+            <article>
+              <span>01</span>
+              <h3>给你一套思考模型</h3>
+              <p>每次复盘都沿着四层追问走：先判断值不值得投入，再判断时机、归属和做法。</p>
+            </article>
+            <article>
+              <span>02</span>
+              <h3>把判断变成下一次行动</h3>
+              <p>复盘不止停在“我跑偏了”，而是沉淀成下一轮校准动作，比如保护上午主线窗口、把支线收进固定缓冲区。</p>
+            </article>
+            <article>
+              <span>03</span>
+              <h3>长期反哺工作习惯</h3>
+              <p>多轮复盘后，系统会记录哪些行动真的让主线占比变高，让用户逐渐内化自己的注意力管理方式。</p>
+            </article>
+          </div>
+          <p class="bottom-line">它陪伴的终点，不是替你判断，而是让你下一次更会判断。</p>
+        </div>
+        <footer class="page-footer">08 / 09</footer>
+      </section>
+
+      <section class="slide workflow-slide" data-title="工作流">
+        <div class="slide-card">
+          <p class="question-hook">它长什么样？</p>
+          <h2>从周期目标，到工作痕迹，再到复盘和成长。</h2>
+          <div class="loop-flow">
+            <article>
+              <strong>01</strong>
+              <h3>录入周期性目标</h3>
+              <p>写下今天或本周需要高优推进的主线。</p>
+            </article>
+            <article>
+              <strong>02</strong>
+              <h3>抓取工作痕迹</h3>
+              <p>聚合会议、文档、企微、AI 对话等信号。</p>
+            </article>
+            <article>
+              <strong>03</strong>
+              <h3>跑偏时提醒</h3>
+              <p>在主线被连续挤掉时低频拉回。</p>
+            </article>
+            <article>
+              <strong>04</strong>
+              <h3>生成复盘建议</h3>
+              <p>看占比、看分流原因，形成校准动作。</p>
+            </article>
+            <article>
+              <strong>05</strong>
+              <h3>长期沉淀成长</h3>
+              <p>多轮复盘后，看见工作习惯是否改善。</p>
+            </article>
+          </div>
+          <div class="demo-links final-links">
+            <a href="./index.html" target="_blank" rel="noreferrer">进入网页 Demo</a>
+            <a href="./robot.html" target="_blank" rel="noreferrer">查看机器人 Mock</a>
+          </div>
+        </div>
+        <footer class="page-footer">09 / 09</footer>
+      </section>
+    </main>
+
+    <script src="./presentation.js"></script>
+  </body>
+</html>

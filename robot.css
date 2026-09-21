@@ -1,0 +1,269 @@
+:root {
+  color-scheme: light;
+  --bg: #f3f4f1;
+  --phone: #fbfbf8;
+  --line: #d8ddd5;
+  --ink: #161a18;
+  --text: #39423d;
+  --muted: #768079;
+  --blue: #4f8cff;
+  --teal: #2db493;
+  --gold: #dfaa2f;
+  --shadow: 0 28px 70px rgba(24, 30, 27, 0.16);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+  color: var(--ink);
+  background: linear-gradient(135deg, #eef1ec 0%, #f7f3e8 100%);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  letter-spacing: 0;
+}
+
+button,
+a {
+  font: inherit;
+}
+
+.robot-shell {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: minmax(360px, 430px);
+  align-items: start;
+  justify-content: center;
+  padding: 32px;
+}
+
+.phone-frame {
+  min-height: 720px;
+  overflow: visible;
+  border: 1px solid var(--line);
+  border-radius: 34px;
+  background: var(--phone);
+  box-shadow: var(--shadow);
+}
+
+.phone-header {
+  height: 66px;
+  display: grid;
+  grid-template-columns: 72px 1fr 72px;
+  align-items: center;
+  padding: 0 18px;
+  border-bottom: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.phone-header span {
+  min-width: 0;
+  font-size: 14px;
+  font-weight: 900;
+  text-align: center;
+}
+
+.phone-header a {
+  color: var(--blue);
+  font-size: 14px;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.phone-header a:last-child {
+  text-align: right;
+}
+
+.chat-day {
+  display: grid;
+  gap: 12px;
+  padding: 18px;
+}
+
+.time-label {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 900;
+  text-align: center;
+}
+
+.bubble {
+  max-width: 88%;
+  display: grid;
+  gap: 8px;
+  padding: 13px 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--text);
+  background: #ffffff;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.bubble strong {
+  color: var(--ink);
+  font-size: 16px;
+}
+
+.bubble p {
+  margin: 0;
+}
+
+.bubble.bot {
+  justify-self: start;
+}
+
+.bubble.user {
+  justify-self: end;
+  border-color: rgba(45, 180, 147, 0.42);
+  color: #05251d;
+  background: #c8f4e8;
+}
+
+.bubble.attention {
+  border-color: rgba(223, 170, 47, 0.44);
+  background: #fff8e0;
+}
+
+.bubble.summary {
+  border-color: rgba(79, 140, 255, 0.34);
+  background: #edf4ff;
+}
+
+.bubble.quiet {
+  color: var(--muted);
+  background: #f3f4f1;
+}
+
+.quick-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.quick-actions button {
+  min-height: 31px;
+  padding: 6px 9px;
+  border: 1px solid rgba(79, 140, 255, 0.28);
+  border-radius: 7px;
+  color: var(--blue);
+  background: rgba(79, 140, 255, 0.07);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.quick-actions button:disabled {
+  opacity: 0.46;
+  cursor: default;
+}
+
+.task-composer {
+  width: 88%;
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid rgba(79, 140, 255, 0.28);
+  border-radius: 8px;
+  background: #f3f7ff;
+}
+
+.task-composer label {
+  display: grid;
+  gap: 5px;
+}
+
+.task-composer label span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.task-composer input {
+  width: 100%;
+  min-height: 38px;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  color: var(--ink);
+  background: #fff;
+  outline: none;
+}
+
+.task-composer input:focus {
+  border-color: var(--blue);
+}
+
+.task-composer > button {
+  min-height: 38px;
+  border: 0;
+  border-radius: 7px;
+  color: #fff;
+  background: var(--blue);
+  cursor: pointer;
+  font-weight: 900;
+}
+
+.review-link {
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 11px;
+  border-radius: 7px;
+  color: #fff;
+  background: var(--blue);
+  font-size: 13px;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.is-revealed {
+  animation: reveal-message 180ms ease-out both;
+}
+
+@keyframes reveal-message {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 960px) {
+  .robot-shell {
+    grid-template-columns: 1fr;
+    padding: 18px;
+  }
+
+  .phone-frame {
+    width: min(430px, 100%);
+    min-height: 0;
+    justify-self: center;
+  }
+}
+
+@media (max-width: 620px) {
+  .robot-shell {
+    padding: 12px;
+  }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .is-revealed {
+    animation: none;
+  }
+}

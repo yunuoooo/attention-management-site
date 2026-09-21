@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>灯塔（注意力复盘工具）· 企微/飞书机器人 Mock</title>
+    <link rel="stylesheet" href="./robot.css" />
+  </head>
+  <body>
+    <main class="robot-shell" aria-label="灯塔注意力复盘机器人 mock">
+      <section class="phone-frame" aria-label="机器人对话">
+        <header class="phone-header">
+          <a href="./index.html" aria-label="返回产品网页">网页</a>
+          <span>灯塔（注意力复盘工具）</span>
+          <a href="./presentation.html" aria-label="打开陈述页">陈述</a>
+        </header>
+
+        <section class="chat-day">
+          <p class="time-label">周一 08:35</p>
+          <article class="bubble bot" id="taskPrompt">
+            <strong>这周最需要高优推进的 1-3 件事是什么？</strong>
+            <p>填写后，灯塔会持续观察这些任务有没有被真正推进。</p>
+            <div class="quick-actions">
+              <button type="button" data-task-action="fill">填写重点任务</button>
+              <button type="button" data-task-action="reuse">沿用上周</button>
+              <button type="button" data-task-action="later">稍后提醒</button>
+            </div>
+          </article>
+          <form class="task-composer" id="taskComposer" hidden>
+            <label><span>重点任务 1</span><input name="task1" value="履约陪伴 Agent 灰度上线闭环" required /></label>
+            <label><span>重点任务 2</span><input name="task2" value="Agent SOP 标准化工具" /></label>
+            <label><span>重点任务 3</span><input name="task3" value="协商方案延期能力" /></label>
+            <button type="submit">发送</button>
+          </form>
+          <article class="bubble user" id="taskReply" hidden></article>
+          <article class="bubble bot" id="taskConfirmed" hidden>已记录。本周网页会优先展示这 3 项任务的投入占比和分流原因。</article>
+        </section>
+
+        <section class="chat-day" id="middayStep" hidden>
+          <p class="time-label">周一 12:10</p>
+          <article class="bubble bot attention">
+            <strong>中午提醒：观察到你重点任务外的一项“8月数据收集”任务，推进明显高于重点任务。</strong>
+            <p>请问这项协作是否是支撑重点任务的必要协作？</p>
+            <div class="quick-actions">
+              <button type="button" data-midday-action="accept">接受提醒</button>
+              <button type="button" data-midday-action="necessary">标记为必要协作</button>
+            </div>
+          </article>
+          <article class="bubble user" id="middayReply" hidden></article>
+          <article class="bubble bot" id="middayConfirmed" hidden></article>
+        </section>
+
+        <section class="chat-day" id="reviewStep" hidden>
+          <p class="time-label">周二 08:50</p>
+          <article class="bubble bot summary">
+            <strong>本周复盘已生成，请确认记录是否准确。</strong>
+            <p>重点任务投入约 40%，低于你设置的 60%。主要分流来自协商方案、SOP 工具、case 回流与触达对齐。</p>
+            <div class="quick-actions">
+              <button type="button" id="confirmReview">内容没问题</button>
+            </div>
+          </article>
+          <article class="bubble user" id="reviewReply" hidden>内容没问题。</article>
+          <article class="bubble bot quiet" id="reviewHandoff" hidden>
+            <strong>复盘记录已确认。</strong>
+            <a class="review-link" href="./index.html#reviewResults">打开网页查看完整复盘记录和建议</a>
+          </article>
+        </section>
+      </section>
+    </main>
+    <script src="./robot.js"></script>
+  </body>
+</html>
